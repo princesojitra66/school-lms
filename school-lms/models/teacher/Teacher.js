@@ -24,7 +24,11 @@ const teacherSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  phone: String,
+  address: String,
+  bio: String,
+
 });
 
 /* 🔥 THIS LINE MUST SAY Teacher */

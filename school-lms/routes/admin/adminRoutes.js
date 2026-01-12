@@ -21,6 +21,8 @@ router.put("/activate-teacher/:id", auth, roleAuth("ADMIN"), c.activateTeacher);
 
 /* SUBJECT */
 router.post("/add-subject", auth, roleAuth("ADMIN"), c.addSubject);
+router.put("/update-subject/:id",auth,roleAuth("ADMIN"),c.updateSubject);
+router.delete("/delete-subject/:id",auth,roleAuth("ADMIN"),c.deleteSubject);
 
 /* ASSIGNMENTS */
 router.post("/assign-student-subject", auth, roleAuth("ADMIN"), c.assignSubjectToStudent);

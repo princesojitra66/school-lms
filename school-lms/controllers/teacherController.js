@@ -52,28 +52,36 @@ exports.updateStudent = async (req, res) => {
 };
 
 
-exports.completeProfile = async (req, res) => {
-  const teacher = await Teacher.findById(req.user.id);
 
+/* ================= COMPLETE PROFILE ================= */
+exports.completeProfile = async (req, res) => {
+  const { phone, address, bio } = req.body;
+
+  const teacher = await Teacher.findById(req.user.id);
   if (!teacher) {
-    return res.status(404).json({ message: "Teacher not found" });
+    return res.status(404).json({
+      success: false,
+      message: "Teacher not found"
+    });
   }
 
   if (teacher.status !== "ACTIVE") {
     return res.status(403).json({
-      message: "Teacher not active"
+      success: false,
+      message: "Teacher not activated by admin"
     });
   }
 
-  teacher.phone = req.body.phone;
-  teacher.address = req.body.address;
-  teacher.bio = req.body.bio;
+  teacher.phone = phone;
+  teacher.address = address;
+  teacher.bio = bio;
 
   await teacher.save();
 
   console.log("TEACHER PROFILE COMPLETED:", teacher.email);
 
   res.json({
+    success: true,
     message: "Profile completed successfully"
   });
 };

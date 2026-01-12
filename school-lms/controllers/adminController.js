@@ -193,6 +193,30 @@ exports.addSubject = async (req, res) => {
   res.json({ message: "Subject added successfully" });
 };
 
+/* ================= UPDATE SUBJECT ================= */
+exports.updateSubject = async (req, res) => {
+  await Subject.findByIdAndUpdate(req.params.id, req.body);
+
+  console.log("ADMIN UPDATED SUBJECT:", req.params.id);
+
+  res.json({
+    success: true,
+    message: "Subject updated successfully"
+  });
+};
+
+/* ================= DELETE SUBJECT ================= */
+exports.deleteSubject = async (req, res) => {
+  await Subject.findByIdAndDelete(req.params.id);
+
+  console.log("ADMIN DELETED SUBJECT:", req.params.id);
+
+  res.json({
+    success: true,
+    message: "Subject deleted successfully"
+  });
+};
+
 /* ================= ASSIGN SUBJECT TO STUDENT ================= */
 exports.assignSubjectToStudent = async (req, res) => {
   const { studentId, subjectId, classId, section } = req.body;
